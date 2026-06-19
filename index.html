@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head> <!-- inicio cabeça do código -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLAPA - Sistema de Apoio</title> <!-- titulo da pagina -->
+</head> <!-- fim cabeça do código -->
+
+<body>
+ 
+
+<!-- =====================pagina inicio classes ===================== -->
+<div class="page active" id="page-home">
+  <header>
+    <link rel="stylesheet" href="style.css">
+    <div class="logo">
+      <img src="https://i.ibb.co/qMdcmQ0D/logo.png" alt="logo"
+      width="150" height="70" style="margin-bottom:4px;">
+    </div>
+
+    <h1>SISTEMA DE APOIO</h1> <!--Titulo do sistema-->
+    <div class="right">
+      <span class="dev">dev: maria eduarda</span>
+      <button class="btn-sair" onclick="alert('Saindo...')">SAIR</button>
+    </div>
+  </header>
+
+  <div class="hero"> <!-- destaque topo pagina -->
+    <p>Gerencie inventário, componentes, saídas e estoques em um só lugar.</p> <!--melhorar desing -->
+  </div>
+
+
+  <div class="main-area"> <!-- conteudo principal -->
+    <div class="cards">
+      <div class="card" id="card-almoxarifado"    
+           style="background-image:url('https://i.ibb.co/21qNkzkn/almo.jpg');"
+           onclick="goTo('page-almoxarifado')"> <!-- vai para pagina almoxarifado -->
+        
+        <div class="overlay"></div>
+        <div class="icon">👷</div> <!-- ícone -->
+        <div class="label">Almoxarifado</div> <!-- nome do card -->
+        <div class="more">Saiba mais →</div>
+      </div>
+
+
+      <div class="card" id="card-controle"
+     style="background-image: url('https://i.ibb.co/NdD6HpPH/Controle.jpg');"
+     onclick="goTo('page-controle')">
+        
+        <div class="overlay"></div>
+        <div class="icon">👷</div> <!-- ícone -->
+        <div class="label">Controle</div> <!-- nome do card -->
+        <div class="more">Saiba mais →</div>
+      </div>
+    </div>
+  </div>
+
+  <footer> <!-- rodapé -->
+    <div class="f-logo">
+      <div class="logo"
+       style="background-image: url('https://i.ibb.co/NdD6HpPH/Controle.jpg');"></div>
+    </div>
+    <div class="copyright"> 2026 FLAPA — Sistema de controle</div>
+  </footer>
+</div>
+
+<!-- ===================== PAGE: ALMOXARIFADO ===================ç== -->
+<div class="page" id="page-almoxarifado">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-home')">← VOLTAR</button>
+    <h1>ALMOXARIFADO</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">SAIR</button>
+  </div>
+  <div class="content">
+    <div class="module-title">SELECIONE UM MÓDULO</div>
+    <div class="modules-grid">
+      <button class="pill red" onclick="goTo('page-inventario')">INVENTÁRIO</button>
+      <button class="pill navy" onclick="goTo('page-componentes')">COMPONENTES</button>
+      <button class="pill red" onclick="goTo('page-saida')">SAÍDA</button>
+      <button class="pill navy" onclick="goTo('page-estsuperior')">ESTOQUE SUPERIOR</button>
+      <button class="pill red" onclick="goTo('page-estinferior')">ESTOQUE INFERIOR</button>
+      <button class="pill navy" onclick="goTo('page-galpao')">GALPÃO</button>
+    </div>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: INVENTARIO ===================== -->
+<div class="page" id="page-inventario">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-almoxarifado')">← voltar</button>
+    <h1>INVENTARIO</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">Sair</button>
+  </div>
+  <div class="content">
+    <div class="small-row">
+      <input type="text" id="inv-desc" placeholder="Descrição">
+      <input type="text" id="inv-cod" placeholder="Codigo">
+      <input type="text" id="inv-marca" placeholder="Marca">
+      <input type="number" id="inv-qtd" placeholder="Qtd">
+      <button class="btn-action navy" onclick="addRow('inventario')">Adicionar</button>
+    </div>
+    <div class="small-row">
+      <input type="search" id="inv-search" placeholder="Pequisar" oninput="renderTable('inventario')" style="width:260px;">
+    </div>
+    <table>
+      <thead>
+        <tr><th>DESCRIÇÃO</th><th>COD.</th><th>MARCA</th><th>QTD</th><th>AÇÕES</th></tr>
+      </thead>
+      <tbody id="inventario-tbody"></tbody>
+    </table>
+  </div>
+  <footer><div class="copyright">2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: COMPONENTES ===================== -->
+<div class="page" id="page-componentes">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-almoxarifado')">← voltar</button>
+    <h1>COMPONENTES</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">Sair</button>
+  </div>
+  <div class="content">
+    <div class="small-row">
+      <input type="search" id="comp-search" placeholder="Pequisar" oninput="renderComponentes()" style="width:220px;">
+      <input type="text" placeholder="---------- de ----" style="width:130px;" disabled>
+      <button class="btn-action navy" onclick="window.print()">Imprimir</button>
+    </div>
+    <div class="small-row">
+      <input type="text" id="comp-nome" placeholder="componente">
+      <input type="text" id="comp-equip" placeholder="equipamento">
+      <input type="text" id="comp-fornecedor" placeholder="fornecedor">
+      <input type="date" id="comp-ida" placeholder="dd/mm/aaaa">
+      <input type="date" id="comp-retorno" placeholder="dd/mm/aaaa">
+      <input type="text" id="comp-nf" placeholder="nota">
+      <button class="btn-action navy" onclick="addComponente()">registrar</button>
+    </div>
+    <table>
+      <thead>
+        <tr><th>COMPONENTE</th><th>EQUIP.</th><th>FORNECEDOR</th><th>IDA</th><th>RETORNO</th><th>NF</th><th>ANEXO</th><th>AÇÕES</th></tr>
+      </thead>
+      <tbody id="componentes-tbody"></tbody>
+    </table>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: SAIDA ===================== -->
+<div class="page" id="page-saida">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-almoxarifado')">← voltar</button>
+    <h1>SAIDA</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">Sair</button>
+  </div>
+  <div class="content">
+    <div class="small-row">
+      <button class="btn-voltar" style="visibility:hidden; padding:0;">x</button>
+      <button class="btn-action red" onclick="toggleHistorico()" id="hist-btn">Historico de saida</button>
+    </div>
+    <div class="small-row">
+      <input type="text" id="saida-empresa" placeholder="Empresa">
+      <input type="text" id="saida-solicitante" placeholder="Solicitante">
+      <input type="date" id="saida-data">
+    </div>
+    <div class="small-row">
+      <input type="number" id="saida-qtd" placeholder="Qtd">
+      <input type="text" id="saida-material" placeholder="Material">
+      <input type="text" id="saida-aplicacao" placeholder="Aplicação">
+    </div>
+    <div class="small-row">
+      <button class="btn-action red" onclick="addSaidaItem()">+ Adicionar item</button>
+      <div style="flex:1"></div>
+      <button class="btn-action navy" onclick="gerarPDFSaida()">Gerar PDF</button>
+    </div>
+    <div id="saida-itens"></div>
+    <div id="saida-historico" style="display:none; margin-top:25px;">
+      <h3 style="margin-bottom:10px;">Histórico de saídas registradas</h3>
+      <table>
+        <thead><tr><th>Empresa</th><th>Solicitante</th><th>Data</th><th>Itens</th><th>Ações</th></tr></thead>
+        <tbody id="historico-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: ESTOQUE SUPERIOR ===================== -->
+<div class="page" id="page-estsuperior">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-almoxarifado')">← voltar</button>
+    <h1>ESTOQUE SUPERIOR</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">Sair</button>
+  </div>
+  <div class="content">
+    <div class="small-row">
+      <input type="text" id="estsup-desc" placeholder="Descrição">
+      <input type="text" id="estsup-cod" placeholder="Codigo">
+      <input type="text" id="estsup-marca" placeholder="Marca">
+      <input type="number" id="estsup-qtd" placeholder="Qtd">
+      <input type="text" id="estsup-local" placeholder="Local">
+      <button class="btn-action navy" onclick="addRow('estsuperior')">Adicionar</button>
+    </div>
+    <div class="small-row">
+      <input type="search" id="estsuperior-search" placeholder="Pequisar" oninput="renderTable('estsuperior')" style="width:260px;">
+    </div>
+    <table>
+      <thead><tr><th>DESCRIÇÃO</th><th>COD.</th><th>MARCA</th><th>QTD</th><th>LOCAL</th><th>AÇÕES</th></tr></thead>
+      <tbody id="estsuperior-tbody"></tbody>
+    </table>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: ESTOQUE INFERIOR ===================== -->
+<div class="page" id="page-estinferior">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-almoxarifado')">← voltar</button>
+    <h1>ESTOQUE INFERIOR</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">Sair</button>
+  </div>
+  <div class="content">
+    <div class="small-row">
+      <input type="text" id="estinf-desc" placeholder="Descrição">
+      <input type="text" id="estinf-cod" placeholder="Codigo">
+      <input type="text" id="estinf-marca" placeholder="Marca">
+      <input type="number" id="estinf-qtd" placeholder="Qtd">
+      <input type="text" id="estinf-local" placeholder="Local">
+      <button class="btn-action navy" onclick="addRow('estinferior')">Adicionar</button>
+    </div>
+    <div class="small-row">
+      <input type="search" id="estinferior-search" placeholder="Pequisar" oninput="renderTable('estinferior')" style="width:260px;">
+    </div>
+    <table>
+      <thead><tr><th>DESCRIÇÃO</th><th>COD.</th><th>MARCA</th><th>QTD</th><th>LOCAL</th><th>AÇÕES</th></tr></thead>
+      <tbody id="estinferior-tbody"></tbody>
+    </table>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: GALPAO ===================== -->
+<div class="page" id="page-galpao">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-almoxarifado')">← voltar</button>
+    <h1>GALPÃO</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">Sair</button>
+  </div>
+  <div class="content">
+    <div class="small-row">
+      <input type="text" id="galpao-desc" placeholder="Descrição">
+      <input type="text" id="galpao-cod" placeholder="Codigo">
+      <input type="text" id="galpao-marca" placeholder="Marca">
+      <input type="number" id="galpao-qtd" placeholder="Qtd">
+      <input type="text" id="galpao-local" placeholder="Local">
+      <button class="btn-action navy" onclick="addRow('galpao')">Adicionar</button>
+    </div>
+    <div class="small-row">
+      <input type="search" id="galpao-search" placeholder="Pequisar" oninput="renderTable('galpao')" style="width:260px;">
+    </div>
+    <table>
+      <thead><tr><th>DESCRIÇÃO</th><th>COD.</th><th>MARCA</th><th>QTD</th><th>LOCAL</th><th>AÇÕES</th></tr></thead>
+      <tbody id="galpao-tbody"></tbody>
+    </table>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: CONTROLE ===================== -->
+<div class="page" id="page-controle">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-home')">← VOLTAR</button>
+    <h1>CONTROLE</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">SAIR</button>
+  </div>
+  <div class="content">
+    <div class="module-title">SELECIONE UM CHECKLIST</div>
+    <div class="modules-grid" style="grid-template-columns:repeat(2,220px);">
+      <button class="pill navy" onclick="goTo('page-check-maquinas')">CHECKLIST MÁQUINAS</button>
+      <button class="pill red" onclick="goTo('page-check-caminhoes')">CHECKLIST CAMINHÕES</button>
+    </div>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: CHECKLIST MAQUINAS ===================== -->
+<div class="page" id="page-check-maquinas">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-controle')">← VOLTAR</button>
+    <h1>CHECKLIST MÁQUINAS</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">SAIR</button>
+  </div>
+  <div class="content">
+    <div class="module-title">SELECIONE A MARCA</div>
+    <div class="marca-row">
+      <button class="pill navy" onclick="selecionarMarca('Máquinas','Volvo')">VOLVO</button>
+      <button class="pill red" onclick="selecionarMarca('Máquinas','CAT')">CAT</button>
+      <button class="pill navy" onclick="selecionarMarca('Máquinas','Sany')">SANY</button>
+    </div>
+    <div id="marca-info-maquinas" class="empty-msg" style="display:none;"></div>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+
+<!-- ===================== PAGE: CHECKLIST CAMINHOES ===================== -->
+<div class="page" id="page-check-caminhoes">
+  <div class="sub-header">
+    <button class="btn-voltar" onclick="goTo('page-controle')">← VOLTAR</button>
+    <h1>CHECKLIST CAMINHÕES</h1>
+    <button class="btn-sair" onclick="alert('Saindo...')">SAIR</button>
+  </div>
+  <div class="content">
+    <div class="module-title">SELECIONE A MARCA</div>
+    <div class="marca-row">
+      <button class="pill navy" onclick="selecionarMarca('Caminhões','Volvo')">VOLVO</button>
+      <button class="pill red" onclick="selecionarMarca('Caminhões','Mercedes')">MERCEDES</button>
+    </div>
+    <div id="marca-info-caminhoes" class="empty-msg" style="display:none;"></div>
+  </div>
+  <footer><div class="copyright">© 2026 FLAPA — Sistema de controle</div></footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
